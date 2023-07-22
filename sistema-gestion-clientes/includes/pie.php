@@ -4,7 +4,7 @@
 
 		<!-- PIE DE PÁGINA -->
 		<footer id="pie">
-			<p>Desarrollado por <a href="https://thewebarquitect.com/">The Web Arquictect</a> &copy; 2018</p>
+			<p>Desarrollado por <a target="blank" href="https://webmasterservices.tech/">Web Master Services</a> &copy; 2018</p>
 		</footer>
 		
         <!-- jQuery -->
