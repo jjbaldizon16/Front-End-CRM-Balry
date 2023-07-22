@@ -1,5 +1,5 @@
 <?php require_once 'includes/cabecera.php'; ?>
-<!-- index system -->
+<!-- Index CRM System -->
 	
 <!-- CAJA PRINCIPAL -->
 <div id="principal">
