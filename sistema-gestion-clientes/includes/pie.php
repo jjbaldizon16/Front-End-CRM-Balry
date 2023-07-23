@@ -3,9 +3,19 @@
 		</div> <!-- fin contenedor -->
 
 		<!-- PIE DE PÁGINA -->
-		<footer id="pie">
-			<p>Desarrollado por <a target="blank" href="https://webmasterservices.tech/">Web Master Services</a> &copy; 2018</p>
-		</footer>
+        <!--<footer class="main-footer">
+            <strong>Copyright &copy; 2023 <a target="blank" href="https://filtrosdeaguacostarica.com">Filtros de Agua Costa Rica</a>.</strong>
+            All rights reserved. <br>
+            <strong><p>Desarrollado por <a target="blank" href="https://webmasterservices.tech/">Web Master Services</a> &copy; 2018</p></strong>
+           <div class="float-right d-none d-sm-inline-block">
+           <b>Version</b> 3.2.0
+          </div>
+         </footer>-->
+
+         <aside class="control-sidebar control-sidebar-dark">
+         <!-- Control sidebar content goes here -->
+         </aside>
+	
 		
         <!-- jQuery -->
         <script src="plugins/jquery/jquery.min.js"></script>

@@ -198,21 +198,40 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index.html" class="nav-link active">
+                <a href="entradas.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v1</p>
+                  <p>Lista de cambios de filtros</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
+                <a href="lista-clientes.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v2</p>
+                  <p>Lista de clientes</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index3.html" class="nav-link">
+                <a href="crear-categoria.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v3</p>
+                  <p>Ingresar cliente</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="crear-entradas.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Ingresar cambio de filtros</p>
+                </a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="reportes.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Reporte cambio de filtros</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="cerrar.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Cerrar sesion</p>
                 </a>
               </li>
             </ul>
@@ -408,13 +427,7 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.2.0
-    </div>
-  </footer>
+ 
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
@@ -423,7 +436,7 @@
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
-			FIN BOTONES
+			
 		</div>
 
 	<div id="ver-todas">
