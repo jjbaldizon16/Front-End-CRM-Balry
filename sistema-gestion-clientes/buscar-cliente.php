@@ -1,6 +1,9 @@
-
+<?php
+	if(!isset($_POST['busqueda'])){
+		header("Location: index.php");
+	}
+?>
 <?php require_once 'includes/cabecera.php'; ?>
-
 <!-- Formulario Buscar cliente -->
 
 <form action="buscar-cliente.php" method="post">
@@ -14,40 +17,42 @@
 		
 <!-- CAJA PRINCIPAL -->
 <div>
-	<h1>Todos los cambios de filtros</h1>
 
-	<table class="table">
+	<h1>Busqueda: <?=$_POST['busqueda']?></h1>
 
-  <tr>
+    <table class="table">
 
-    <td class="col">Cliente</td>
+<tr>
 
-	<td class="col">Telefono1</td>
+<td class="col">Cliente</td>
 
-	<td class="col">Telefono2</td>
+<td class="col">Telefono1</td>
 
-	<td class="col">Provincia</td>
+<td class="col">Telefono2</td>
 
-    <td class="col">Direccion Instacion</td>
+<td class="col">Provincia</td>
 
-    <td class="col">Historial</td>
+<td class="col">Direccion Instacion</td>
+
+<td class="col">Historial</td>
+
+<td class="col">Fecha Ultimo Cambio</td>
+
+<td class="col">Fecha Proximo Cambio</td>
+
+<td class="col">Editar</td>
+
+</tr>
 	
-	<td class="col">Fecha Ultimo Cambio</td>
+	<?php 
+		$entradas = conseguirEntradas($db, null, null, $_POST['busqueda']);
 
-	<td class="col">Fecha Proximo Cambio</td>
-
-	<td class="col">Editar</td>
-
-  </tr>
-
-
-
-  <?php 
-		$entradas = conseguirEntradas($db);
-		if(!empty($entradas)):
+		if(!empty($entradas) && mysqli_num_rows($entradas) >= 1):
 			while($entrada = mysqli_fetch_assoc($entradas)):
 	?>
-  
+
+
+
 <tr>
 
 
@@ -78,14 +83,14 @@
 
   </tr>
 
-  <?php
-			endwhile;
-		endif;
-	?>
-
 </table>
-	
-
+				
+	<?php
+			endwhile;
+		else:
+	?>
+		<div class="alerta">No hay clientes en el sistema</div>
+	<?php endif; ?>
 </div> <!--fin principal-->
 			
 <?php require_once 'includes/pie.php'; ?>

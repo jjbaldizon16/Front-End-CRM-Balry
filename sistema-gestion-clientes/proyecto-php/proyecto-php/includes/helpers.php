@@ -54,72 +54,12 @@ function conseguirCategoria($conexion, $id){
 	return $resultado;
 }
 
-function conseguirCambiofiltro($conexion, $id) {
-
-     $sql = "SELECT * FROM entradas Where id = $id;";
-	 $cambiofiltro = mysqli_query($conexion, $sql);
-
-	 $resultado = array();
-	if($cambiofiltro && mysqli_num_rows($cambiofiltro) >= 1){
-		$resultado = mysqli_fetch_assoc($cambiofiltro);
-	}
-	
-	return $resultado;
-
-}
-
-function conseguirCliente($conexion, $id) {
-
-  
-	$sql = "SELECT FROM categorias Where id = $id;";
-	$cambiocliente = mysqli_query($conexion, $sql);
-
-	$resultado = array();
-   if($cambiocliente && mysqli_num_rows($cambiocliente) >= 1){
-	   $resultado = mysqli_fetch_assoc($cambiocliente);
-   }
-   
-   return $resultado;
-
-}
-
-function conseguirClientes($conexion, $limit = null, $categoria = null, $busqueda = null) {
-
-	$sql="SELECT e.*, c.cedula AS 'cedula', c.nombre AS 'nombre', c.apellido1 AS 'apellido1', c.apellido2 AS 'apellido2', c.email AS 'email', c.telefono1 AS 'telefono1', c.telefono2 AS 'telefono2', c.direccion_casa AS 'direccion_casa', c.direccion_trabajo AS 'direccion_trabajo' FROM entradas e ".
-	"INNER JOIN categorias c ON e.categoria_id = c.id ";
-
-if(!empty($categoria)){
-   $sql .= "WHERE e.categoria_id = $categoria ";
-}
-
-if(!empty($busqueda)){
-   $sql .= "WHERE e.titulo LIKE '%$busqueda%' ";
-}
-
-$sql .= "ORDER BY e.id DESC ";
-
-if($limit){
-   // $sql = $sql." LIMIT 4";
-   $sql .= "LIMIT 4";
-}
-
-$entradas = mysqli_query($conexion, $sql);
-
-$resultado = array();
-if($entradas && mysqli_num_rows($entradas) >= 1){
-   $resultado = $entradas;
-}
-
-return $entradas;
-
-}
-
-function conseguirEntrada($conexion, $id){
-	$sql = "SELECT e.*, c.nombre AS 'categoria', CONCAT(u.nombre, ' ', u.apellido1) AS usuario"
+function conseguirEntrada($conexion, $nombre){
+	$sql = "SELECT e.*, c.nombre AS 'categoria', CONCAT(u.nombre, ' ', u.apellidos) AS usuario"
 		  . " FROM entradas e ".
 		   "INNER JOIN categorias c ON e.categoria_id = c.id ".
 		   "INNER JOIN usuarios u ON e.usuario_id = u.id ".
-		   "WHERE e.id = $id";
+		   "WHERE e.nombre = $nombre";
 	$entrada = mysqli_query($conexion, $sql);
 	
 	$resultado = array();
@@ -131,7 +71,7 @@ function conseguirEntrada($conexion, $id){
 }
 
 function conseguirEntradas($conexion, $limit = null, $categoria = null, $busqueda = null){
-	$sql="SELECT e.*, c.nombre AS 'nombre', c.apellido1 AS 'apellido1', c.apellido2 AS 'apellido2', c.telefono1 AS 'telefono1', c.telefono2 AS 'telefono2' FROM entradas e ".
+	$sql="SELECT e.*, c.nombre AS 'categoria' FROM entradas e ".
 		 "INNER JOIN categorias c ON e.categoria_id = c.id ";
 	
 	if(!empty($categoria)){
@@ -139,7 +79,7 @@ function conseguirEntradas($conexion, $limit = null, $categoria = null, $busqued
 	}
 	
 	if(!empty($busqueda)){
-		$sql .= "WHERE c.nombre LIKE '%$busqueda%' ";
+		$sql .= "WHERE e.titulo LIKE '%$busqueda%' ";
 	}
 	
 	$sql .= "ORDER BY e.id DESC ";
@@ -158,6 +98,3 @@ function conseguirEntradas($conexion, $limit = null, $categoria = null, $busqued
 	
 	return $entradas;
 }
-
-
-
