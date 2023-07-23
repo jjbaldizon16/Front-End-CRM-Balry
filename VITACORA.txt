@@ -1,0 +1,1 @@
+Enlace de paginacion:https://www.gitmedio.com/como-hacer-paginacion-codigo-en-php-y-mysql/
