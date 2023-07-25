@@ -1,4 +1,5 @@
 <?php require_once 'includes/cabecera.php'; ?>
+<?php require_once 'includes/redireccion.php'; ?>
 
 		
 <!-- CAJA PRINCIPAL -->
@@ -298,15 +299,29 @@
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-
+    
     <!-- Main content -->
     <section class="content">
 
     <!-- Lista de cambios de filtros -->
+    
 
     <div class="card">
+    
               <div class="card-header">
-                <h3 class="card-title">Todos los cambios de filtros</h3>
+              <h3>Todos los cambios de filtros</h3> <br>
+                
+              <!-- Formulario Buscar cliente -->
+
+              <form action="buscar-cliente.php" method="post">
+              <h5>Buscar cliente</h5>
+              <label for="busqueda"></label>
+              <input type="text" name="busqueda" placeholder="Nombre del cliente">
+              <button>Buscar</button>
+              </form>
+
+<!--Fin formulario Buscar cliente-->
+                
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -400,7 +415,7 @@ foreach ($resultados as $fila):
 
 	             <td><?=$fila['fecha_proximo_cambio']?></td>
 
-	             <td><a href="editar-entrada.php?id=<?=$fila['id']?>" class="boton boton-verde">Editar registro</a></td>
+	             <td><a href="editar-entrada.php?id=<?=$fila['id']?>" class="btn btn-primary">Editar registro</a></td>
 
 
 	
@@ -421,10 +436,10 @@ foreach ($resultados as $fila):
                  echo "<br>";
                  echo "Página " . $paginaActual . " de " . $totalPaginas . "<br>";
                  if ($paginaActual > 1) {
-                 echo "<a href='?pagina=" . ($paginaActual - 1) . "'>Anterior</a> ";
+                 echo "<a class='btn btn-primary' href='?pagina=" . ($paginaActual - 1) . "'>Anterior</a> ";
                  }
                  if ($paginaActual < $totalPaginas) {
-                 echo "<a href='?pagina=" . ($paginaActual + 1) . "'>Siguiente</a>";
+                 echo "<a class='btn btn-primary' href='?pagina=" . ($paginaActual + 1) . "'>Siguiente</a>";
                  }
 
   
