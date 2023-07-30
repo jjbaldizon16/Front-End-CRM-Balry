@@ -1,0 +1,33 @@
+Modificame el siguiente script para una busqueda de solo las categorias cuando el usuario introdusca el valor de un
+nombre dentro del parametro $busqueda
+
+
+
+function conseguirEntradas($conexion, $limit = null, $categoria = null, $busqueda = null){
+	$sql="SELECT e.*, c.nombre AS 'nombre', c.apellido1 AS 'apellido1', c.apellido2 AS 'apellido2', c.telefono1 AS 'telefono1', c.telefono2 AS 'telefono2' FROM entradas e ".
+		 "INNER JOIN categorias c ON e.categoria_id = c.id ";
+	
+	if(!empty($categoria)){
+		$sql .= "WHERE e.categoria_id = $categoria ";
+	}
+	
+	if(!empty($busqueda)){
+		$sql .= "WHERE c.nombre LIKE '%$busqueda%' ";
+	}
+	
+	$sql .= "ORDER BY e.id DESC ";
+	
+	if($limit){
+		// $sql = $sql." LIMIT 4";
+		$sql .= "LIMIT 4";
+	}
+	
+	$entradas = mysqli_query($conexion, $sql);
+	
+	$resultado = array();
+	if($entradas && mysqli_num_rows($entradas) >= 1){
+		$resultado = $entradas;
+	}
+	
+	return $entradas;
+}

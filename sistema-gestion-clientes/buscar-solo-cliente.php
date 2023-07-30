@@ -314,11 +314,11 @@
     <div class="card">
     
               <div class="card-header">
-              <h3>Todos los cambios de filtros</h3> <br>
+              <h3>Todos los clientes</h3> <br>
                 
               <!-- Formulario Buscar cliente -->
 
-              <form action="buscar-cliente.php" method="post">
+              <form action="buscar-solo-cliente.php" method="post">
               <h5>Buscar cliente</h5>
               <label for="busqueda"></label>
               <input type="text" name="busqueda" placeholder="Nombre del cliente">
@@ -335,28 +335,30 @@
                   <thead>
                   <tr>
 
-                  <td class="col">Cliente</td>
+                  <td class="col">Cedula</td>
+
+                  <td class="col">Nombre</td>
+
+                  <td class="col">Apellido1</td>
+
+                  <td class="col">Apellido2</td>
+
+                  <td class="col">Correo Electronico</td>
 
                   <td class="col">Telefono1</td>
 
                   <td class="col">Telefono2</td>
 
-                  <td class="col">Provincia</td>
+                  <td class="col">Direccion Casa</td>
 
-                  <td class="col">Direccion Instacion</td>
-
-                  <td class="col">Historial</td>
-
-                  <td class="col">Fecha Ultimo Cambio</td>
-
-                  <td class="col">Fecha Proximo Cambio</td>
+                  <td class="col">Direccion Trabajo</td>
 
                   <td class="col">Editar</td>
 
                   </tr>
                   <?php 
 	
-	             $entradas = conseguirEntradas($db, null, null, $_POST['busqueda']);
+	             $entradas = buscarClientes($db, null, null, $_POST['busqueda']);
 
 		         if(!empty($entradas) && mysqli_num_rows($entradas) >= 1):
 			     while($entrada = mysqli_fetch_assoc($entradas)):
@@ -366,23 +368,25 @@
 
                   </thead>
                   <tbody>
-                  <td scope="row"><?=$entrada['nombre'].' '.$entrada['apellido1'].' '.$entrada['apellido2']?></td>
+                  <td scope="row"><?=$entrada['cedula']?></td>
     
-	              <td><?=$entrada['telefono1']?></td>
+	              <td><?=$entrada['nombre']?></td>
 
-	              <td><?=$entrada['telefono2']?></td>
+	              <td><?=$entrada['apellido1']?></td>
 
-	             <td><?=$entrada['direccion_provincia']?></td>
+	             <td><?=$entrada['apellido2']?></td>
 
-                 <td><?=$entrada['direccion_instalacion']?></td>
+                 <td><?=$entrada['email']?></td>
 
-                 <td><?=$entrada['historial']?></td>
+                 <td><?=$entrada['telefono1']?></td>
 
-	             <td><?=$entrada['fecha_ultimo_cambio']?></td>
+	             <td><?=$entrada['telefono2']?></td>
 
-	             <td><?=$entrada['fecha_proximo_cambio']?></td>
+	             <td><?=$entrada['direccion_casa']?></td>
 
-	             <td><a href="editar-entrada.php?id=<?=$entrada['id']?>" class="btn btn-primary">Editar registro</a></td>
+                 <td><?=$entrada['direccion_trabajo']?></td>
+
+	             <td><a href="editar-cliente.php?id=<?=$entrada['id']?>" class="btn btn-primary">Editar registro</a></td>
 
 
 	

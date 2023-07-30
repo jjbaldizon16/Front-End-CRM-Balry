@@ -85,18 +85,18 @@ function conseguirCliente($conexion, $id) {
 
 function conseguirClientes($conexion, $limit = null, $categoria = null, $busqueda = null) {
 
-	$sql="SELECT e.*, c.cedula AS 'cedula', c.nombre AS 'nombre', c.apellido1 AS 'apellido1', c.apellido2 AS 'apellido2', c.email AS 'email', c.telefono1 AS 'telefono1', c.telefono2 AS 'telefono2', c.direccion_casa AS 'direccion_casa', c.direccion_trabajo AS 'direccion_trabajo' FROM entradas e ".
-	"INNER JOIN categorias c ON e.categoria_id = c.id ";
+	$sql="SELECT e.*, c.id AS 'id' c.cedula AS 'cedula', c.nombre AS 'nombre', c.apellido1 AS 'apellido1', c.apellido2 AS 'apellido2', c.email AS 'email', c.telefono1 AS 'telefono1', c.telefono2 AS 'telefono2', c.direccion_casa AS 'direccion_casa', c.direccion_trabajo AS 'direccion_trabajo' FROM categorias c ";
+	//"INNER JOIN categorias c ON e.categoria_id = c.id ";
 
 if(!empty($categoria)){
-   $sql .= "WHERE e.categoria_id = $categoria ";
+   $sql .= "WHERE c.id = $categoria ";
 }
 
 if(!empty($busqueda)){
-   $sql .= "WHERE e.titulo LIKE '%$busqueda%' ";
+   $sql .= "WHERE c.nombre LIKE '%$busqueda%' ";
 }
 
-$sql .= "ORDER BY e.id DESC ";
+$sql .= "ORDER BY c.id DESC ";
 
 if($limit){
    // $sql = $sql." LIMIT 4";
@@ -113,6 +113,9 @@ if($entradas && mysqli_num_rows($entradas) >= 1){
 return $entradas;
 
 }
+
+
+
 
 function conseguirEntrada($conexion, $id){
 	$sql = "SELECT e.*, c.nombre AS 'categoria', CONCAT(u.nombre, ' ', u.apellido1) AS usuario"
@@ -158,6 +161,43 @@ function conseguirEntradas($conexion, $limit = null, $categoria = null, $busqued
 	
 	return $entradas;
 }
+
+function buscarClientes($conexion, $limit = null, $categoria = null, $busqueda = null){
+	$sql="SELECT e.*, c.nombre AS 'nombre', c.apellido1 AS 'apellido1', c.apellido2 AS 'apellido2', c.telefono1 AS 'telefono1', c.telefono2 AS 'telefono2' FROM entradas e ".
+		 "INNER JOIN categorias c ON e.categoria_id = c.id ";
+	
+	$whereClauses = array();
+	
+	if (!empty($categoria)){
+		$whereClauses[] = "e.categoria_id = $categoria";
+	}
+	
+	if (!empty($busqueda)){
+		$whereClauses[] = "c.nombre LIKE '%$busqueda%'";
+	}
+	
+	if (count($whereClauses) > 0) {
+		$sql .= "WHERE " . implode(" AND ", $whereClauses);
+	}
+	
+	$sql .= " ORDER BY e.id DESC ";
+	
+	if ($limit){
+		$sql .= "LIMIT 4";
+	}
+	
+	$entradas = mysqli_query($conexion, $sql);
+	
+	$resultado = array();
+	if ($entradas && mysqli_num_rows($entradas) >= 1){
+		$resultado = $entradas;
+	}
+	
+	return $resultado;
+}
+
+
+
 
 
 

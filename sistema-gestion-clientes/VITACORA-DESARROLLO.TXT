@@ -1,0 +1,10 @@
+REVISAR QUE TODO FUNCIONOA BIEN DEL LADO DE BACKEN CON LOS DATOS EN LAS SIGUIENTES PARTES:
+1-Lista de cambios de filtros
+2-Busqueda de cambios de filtros
+3-Edicion de cambios de filtros
+4-Lista de Clientes
+5-Busqueda de Clientes
+6-Edicion de Clientes
+
+Despues de eso ensamblar con el Front End para generar las vistas
+y por ultimo guardar en el Git Hub
