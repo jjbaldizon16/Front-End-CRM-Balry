@@ -31,7 +31,7 @@ function borrarErrores(){
 }
 
 function conseguirCategorias($conexion){
-	$sql = "SELECT * FROM categorias ORDER BY id ASC;";
+	$sql = "SELECT * FROM categorias ORDER BY id DESC;";
 	$categorias = mysqli_query($conexion, $sql);
 	
 	$resultado = array();

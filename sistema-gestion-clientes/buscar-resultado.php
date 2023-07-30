@@ -1,67 +1,544 @@
-<?php
-// Conexión a la base de datos (modifica con tus datos de conexión)
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "u142702078_clientes";
+<?php require_once 'includes/cabecera.php'; ?>
+<?php require_once 'includes/redireccion.php'; ?>   
 
-// Recibir el nombre del cliente enviado desde el formulario
-if (isset($_POST['nombre'])) {
-    $nombre = $_POST['nombre'];
+		
+<!-- CAJA PRINCIPAL -->
+<div id="principal">
+	
+	      
+	<?php if(isset($_SESSION['usuario'])): ?>
+		<div id="usuario-logueado" class="bloque">
+			
+			<!--botones-->
+			<div class="wrapper">
 
-    // Conexión a la base de datos
-    $conn = new mysqli($servername, $username, $password, $dbname);
+  <!-- Preloader -->
+  <div class="preloader flex-column justify-content-center align-items-center">
+    <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+  </div>
 
-    // Verificar la conexión
-    if ($conn->connect_error) {
-        die("Error de conexión: " . $conn->connect_error);
-    }
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+	  <h3>Bienvenido, <?=$_SESSION['usuario']['nombre'].' '.$_SESSION['usuario']['apellidos'];?></h3>
+      
+     
+    </ul>
 
-    // Consulta para buscar el cliente por nombre
-    $sql = "SELECT id, nombre, apellido1, apellido2, email, telefono1, telefono2, direccion_casa, direccion_trabajo FROM categorias WHERE nombre LIKE '%$nombre%'";
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      <!-- Navbar Search -->
+      <li class="nav-item">
+        <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+          <i class="fas fa-search"></i>
+        </a>
+        <div class="navbar-search-block">
+          <form class="form-inline">
+            <div class="input-group input-group-sm">
+              <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+              <div class="input-group-append">
+                <button class="btn btn-navbar" type="submit">
+                  <i class="fas fa-search"></i>
+                </button>
+                <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </li>
 
-    // Ejecutar la consulta
-    $result = $conn->query($sql);
+      <!-- Messages Dropdown Menu -->
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="far fa-comments"></i>
+          <span class="badge badge-danger navbar-badge">3</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <a href="#" class="dropdown-item">
+            <!-- Message Start -->
+            <div class="media">
+              <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+              <div class="media-body">
+                <h3 class="dropdown-item-title">
+                  Brad Diesel
+                  <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
+                </h3>
+                <p class="text-sm">Call me whenever you can...</p>
+                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+              </div>
+            </div>
+            <!-- Message End -->
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <!-- Message Start -->
+            <div class="media">
+              <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <div class="media-body">
+                <h3 class="dropdown-item-title">
+                  John Pierce
+                  <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
+                </h3>
+                <p class="text-sm">I got your message bro</p>
+                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+              </div>
+            </div>
+            <!-- Message End -->
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <!-- Message Start -->
+            <div class="media">
+              <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <div class="media-body">
+                <h3 class="dropdown-item-title">
+                  Nora Silvester
+                  <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
+                </h3>
+                <p class="text-sm">The subject goes here</p>
+                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+              </div>
+            </div>
+            <!-- Message End -->
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+        </div>
+      </li>
+      <!-- Notifications Dropdown Menu -->
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="far fa-bell"></i>
+          <span class="badge badge-warning navbar-badge">15</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <span class="dropdown-item dropdown-header">15 Notifications</span>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-envelope mr-2"></i> 4 new messages
+            <span class="float-right text-muted text-sm">3 mins</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-users mr-2"></i> 8 friend requests
+            <span class="float-right text-muted text-sm">12 hours</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-file mr-2"></i> 3 new reports
+            <span class="float-right text-muted text-sm">2 days</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+          <i class="fas fa-expand-arrows-alt"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button">
+          <i class="fas fa-th-large"></i>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->
 
-    // Verificar si se encontraron resultados
-    if ($result->num_rows > 0) {
-        // Mostrar los resultados en una tabla
-        echo "<h2>Resultados:</h2>";
-        echo "<table border='1'>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Apellido 1</th>
-                    <th>Apellido 2</th>
-                    <th>email</th>
-                    <th>telefono1</th>
-                    <th>Telefono2</th>
-                    <th>Direccion Casa</th>
-                    <th>Direccion Trabajo</th>
-                    <th>Editar Registro</th>
-                </tr>";
-        while ($row = $result->fetch_assoc()) {
-            echo "<tr>
-                    <td>".$row['id']."</td>
-                    <td>".$row['nombre']."</td>
-                    <td>".$row['apellido1']."</td>
-                    <td>".$row['apellido2']."</td>
-                    <td>".$row['email']."</td>
-                    <td>".$row['telefono1']."</td>
-                    <td>".$row['telefono2']."</td>
-                    <td>".$row['direccion_casa']."</td>
-                    <td>".$row['direccion_trabajo']."</td>
-                    <td><a href='editar-cliente.php?id=".$row['id']."'>Modificar</a></td>
-                </tr>";
-        }
-        echo "</table>";
-    } else {
-        echo "<p>No se encontraron resultados.</p>";
-    }
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="" class="brand-link">
+      <img src="imagenes/purificadores-costa-rica.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">CRM PCR</span>
+    </a>
 
-    // Cerrar la conexión
-    $conn->close();
-} else {
-    echo "<p>No se recibió el nombre del cliente.</p>";
-}
-?>
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+	  <div class="image">
+            <img src="imagenes/manager.jpg" class="img-circle elevation-2" alt="User Image">
+       </div>
+        <div class="info">
+          <a href="#" class="d-block"><?=$_SESSION['usuario']['nombre'].' '.$_SESSION['usuario']['apellidos'];?></a>
+        </div>
+      </div>
+
+      <!-- SidebarSearch Form -->
+      <div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+          <div class="input-group-append">
+            <button class="btn btn-sidebar">
+              <i class="fas fa-search fa-fw"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item menu-open">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Dashboard
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="entradas.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Lista de cambios de filtros</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="lista-clientes.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Lista de clientes</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="crear-categoria.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Ingresar cliente</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="crear-entradas.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Ingresar cambio de filtros</p>
+                </a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="reportes.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Reporte cambio de filtros</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="cerrar.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Cerrar sesion</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+         
+          <li class="nav-item">
+          
+          
+          </li>
+          <li class="nav-item">
+          
+         
+          </li>
+          <li class="nav-item">
+           
+          
+          </li>
+          <li class="nav-item">
+           
+           
+          </li>
+          <li class="nav-item">
+           
+            
+        
+          </li>
+          
+          
+         
+        
+       
+        
+        
+             
+             
+         
+             
+    
+         
+           
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Dashboard</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Dashboard v1</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    
+    <!-- Main content -->
+    <section class="content">
+
+    <!-- Lista de cambios de filtros -->
+    
+
+    <div class="card">
+    
+              <div class="card-header">
+              <h3>Todos los cambios de filtros</h3> <br>
+                
+              <!-- Formulario Buscar cliente -->
+
+              <form action="buscar-resultado.php" method="post">
+              <h5>Buscar cliente</h5>
+              <label for="nombre"></label>
+              <input type="text" name="nombre" placeholder="Nombre del cliente">
+              <button>Buscar</button>
+              </form>
+
+<!--Fin formulario Buscar cliente-->
+               <?php  
+               // Conexión a la base de datos (modifica con tus datos de conexión)
+               $servername = "localhost";
+               $username = "root";
+               $password = "";
+               $dbname = "u142702078_clientes";
+
+               // Recibir el nombre del cliente enviado desde el formulario
+               if (isset($_POST['nombre'])) {
+               $nombre = $_POST['nombre'];
+
+               // Conexión a la base de datos
+               $conn = new mysqli($servername, $username, $password, $dbname);
+
+               // Verificar la conexión
+               if ($conn->connect_error) {
+               die("Error de conexión: " . $conn->connect_error);
+               }
+
+               // Consulta para buscar el cliente por nombre
+               $sql = "SELECT id, cedula, nombre, apellido1, apellido2, email, telefono1, telefono2, direccion_casa, direccion_trabajo FROM categorias WHERE nombre LIKE '%$nombre%'";
+
+              // Ejecutar la consulta
+              $result = $conn->query($sql);
+
+              // Verificar si se encontraron resultados
+              if ($result->num_rows > 0){
+
+               ?>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+              <h1>Busqueda: <?=$_POST['nombre']?></h1>
+                <table id="example2" class="table table-bordered table-hover">
+                  <thead>
+                  <tr>
+
+                  <td class="col">Cedula</td>
+
+                  <td class="col">Nombre</td>
+
+                  <td class="col">Apellido1</td>
+
+                  <td class="col">Apellido2</td>
+
+                  <td class="col">Correo Electronico</td>
+
+                  <td class="col">Telefono1</td>
+
+                  <td class="col">Telefono2</td>
+
+                  <td class="col">Direccion Casa</td>
+
+                  <td class="col">Direccion Trabajo</td>
+
+                  <td class="col">Editar</td>
+
+                  </tr>
+                  <?php 
+	
+	            // $entradas = conseguirEntradas($db, null, null, $_POST['busqueda']);
+
+		        // if(!empty($entradas) && mysqli_num_rows($entradas) >= 1):
+			    // while($entrada = mysqli_fetch_assoc($entradas)):
+                    while ($row = $result->fetch_assoc()):
+
+
+	?>
+
+                  </thead>
+                  <tbody>
+                  <td scope="row"><?=$row['cedula']?></td>
+    
+	              <td><?=$row['nombre']?></td>
+
+	              <td><?=$row['apellido1']?></td>
+
+	             <td><?=$row['apellido2']?></td>
+
+                 <td><?=$row['email']?></td>
+
+                 <td><?=$row['telefono1']?></td>
+
+	             <td><?=$row['telefono2']?></td>
+
+	             <td><?=$row['direccion_casa']?></td>
+
+                 <td><?=$row['direccion_trabajo']?></td>
+
+	             <td><a href="editar-cliente.php?id=<?=$row['id']?>" class="btn btn-primary">Editar registro</a></td>
+
+
+	
+
+                  </tbody>
+                  <tfoot>
+                 
+                  </tfoot>
+                  <?php
+			      endwhile;
+		        
+	             ?>
+
+                </table>
+
+                <?php
+			      }else {
+                    echo "<p>No hay clientes en el sistema.</p>";
+                  }
+
+                  // Cerrar la conexión
+                  $conn->close();
+                  } else {
+                  echo "<p>No se recibió el nombre del cliente.</p>";
+                  }
+                
+		          
+	             ?>
+		       
+	           
+
+
+
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+    <!-- /.Lista de cambios de filtros -->
+      
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+ 
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+			
+		</div>
+
+	<div id="ver-todas">
+		
+	</div>
+
+	<div id="ver-todas">
+		
+	</div>
+
+	<?php endif; ?>
+	
+	<?php if(!isset($_SESSION['usuario'])): ?>
+	<!--<div id="login" class="bloque">-->
+	<div class="hold-transition login-page">
+	<div class="login-box">
+	<div class="login-logo">
+    <a href=""><b>CRM</b>Purificadores Costa Rica</a>
+    </div>
+	
+		
+		<?php if(isset($_SESSION['error_login'])): ?>
+			<div class="alerta alerta-error">
+				<?=$_SESSION['error_login'];?>
+			</div>   
+		<?php endif; ?>
+		<div class="card">
+		<div class="card-body login-card-body">
+		<p class="login-box-msg">Ingrese sus credenciales para entrar al sistema</p>
+		
+		<form action="login.php" method="post">
+        <div class="input-group mb-3">
+          <input type="email" class="form-control" name="email" placeholder="Email">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" name="password" placeholder="Password">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <div class="icheck-primary">
+             
+            </div>
+          </div>
+          <!-- /.col -->
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block">Ingresar</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+	</div>
+	</div>
+	</div>
+    </div>
+	</div>
+	</div>
+	
+	<?php endif; ?>
+
+
+	
+</div> <!--fin principal-->
+
+
+			
+<?php require_once 'includes/pie.php'; ?>
+
