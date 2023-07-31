@@ -309,7 +309,7 @@
     <div class="card">
     
               <div class="card-header">
-              <h3>Todos los cambios de filtros</h3> <br>
+              <h3>Todos los Clientes</h3> <br>
                 
               <!-- Formulario Buscar cliente -->
 

@@ -3,6 +3,7 @@
 		header("Location: index.php");
 	}
 ?>
+
 <?php require_once 'includes/cabecera.php'; ?>
 <?php require_once 'includes/redireccion.php'; ?>   
 
@@ -326,7 +327,7 @@
               </form>
 
 <!--Fin formulario Buscar cliente-->
-                
+
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -411,6 +412,8 @@
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
+
+          
 
     <!-- /.Lista de cambios de filtros -->
       
