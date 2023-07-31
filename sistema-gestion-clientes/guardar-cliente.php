@@ -50,7 +50,7 @@ if(isset($_POST)){
 
 		$guardar = mysqli_query($db, $sql);
 
-		header("Location: index.php");
+		header("Location: lista-clientes.php");
 	
 	
 }
