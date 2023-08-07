@@ -198,6 +198,16 @@ function buscarClientes($conexion, $limit = null, $categoria = null, $busqueda =
 
 
 
-
+function conseguirUsuario($conexion, $id){
+	$sql = "SELECT * FROM usuarios WHERE id = $id;";
+	$usuarios = mysqli_query($conexion, $sql);
+	
+	$resultado = array();
+	if($usuarios && mysqli_num_rows($usuarios) >= 1){
+		$resultado = mysqli_fetch_assoc($usuarios);
+	}
+	
+	return $resultado;
+}
 
 

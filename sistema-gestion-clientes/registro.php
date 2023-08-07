@@ -2,7 +2,7 @@
 if(isset($_POST)){
 	
 	// Conexión a la base de datos
-	require_once 'includes/conexion.php';
+	require_once 'includes/conexion.php';  
 
 	// Iniciar sesión
 	if(!isset($_SESSION)){
@@ -10,7 +10,7 @@ if(isset($_POST)){
 	}
 	
 	// Recorger los valores del formulario de registro
-	$nombre = isset($_POST['nombre']) ? mysqli_real_escape_string($db, $_POST['nombre']) : false;
+	$nombre = isset($_POST['nombre']) ? mysqli_real_escape_string($db, $_POST['nombre']) : false;  
 	$apellidos = isset($_POST['apellidos']) ? mysqli_real_escape_string($db, $_POST['apellidos']) : false;
 	$email = isset($_POST['email']) ? mysqli_real_escape_string($db, trim($_POST['email'])) : false;
 	$password = isset($_POST['password']) ? mysqli_real_escape_string($db, $_POST['password']) : false;
