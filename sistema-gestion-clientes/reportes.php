@@ -6,7 +6,7 @@
 <div id="principal">
 	
 	      
-	<?php if(isset($_SESSION['usuario'])): ?>
+	<?php if(isset($_SESSION['usuario']) && $_SESSION['usuario']['nivel_usuario']=='administrador'): ?>
 		<div id="usuario-logueado" class="bloque">
 			
 			<!--botones-->
@@ -384,7 +384,9 @@
 		
 	</div>
 
-	<?php endif; ?>
+	<?php else: ?>
+  <?php header("Location: index.php"); ?>
+  <?php endif; ?>
 	
 	<?php if(!isset($_SESSION['usuario'])): ?>
 	<!--<div id="login" class="bloque">-->
