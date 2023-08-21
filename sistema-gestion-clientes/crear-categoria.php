@@ -230,6 +230,18 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="lista-usuarios.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Lista de Usuarios</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="ingresar-usuario.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Ingresar Usuario</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="cerrar.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Cerrar sesion</p>

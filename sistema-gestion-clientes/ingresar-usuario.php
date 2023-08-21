@@ -6,7 +6,7 @@
 <div id="principal">
 	
 	      
-	<?php if(isset($_SESSION['usuario'])): ?>
+	<?php if(isset($_SESSION['usuario']) && $_SESSION['usuario']['nivel_usuario']=='administrador'): ?>
 		<div id="usuario-logueado" class="bloque">
 			
 			<!--botones-->
@@ -230,6 +230,18 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="lista-usuarios.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Lista de Usuarios</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="ingresar-usuario.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Ingresar Usuario</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="cerrar.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Cerrar sesion</p>
@@ -380,7 +392,9 @@
 		
 	</div>
 
-	<?php endif; ?>
+	<?php else: ?>
+  <?php header("Location: index.php"); ?>
+  <?php endif; ?>
 	
 	<?php if(!isset($_SESSION['usuario'])): ?>
 	<!--<div id="login" class="bloque">-->

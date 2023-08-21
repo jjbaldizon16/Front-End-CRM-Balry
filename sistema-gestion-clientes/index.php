@@ -229,6 +229,18 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="ingresar-usuario.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Ingresar Usuario</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="lista-usuarios.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Lista de Usuarios</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="cerrar.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Cerrar sesion</p>
@@ -377,6 +389,22 @@
                 <i class="ion ion-pie-graph"></i>
               </div>
               <a href="reportes.php" class="small-box-footer">Hacer reporte de cambios de filtros <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <h4>Usuarios</h4>
+
+               
+              </div>
+              <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+              </div>
+              <a href="lista-usuarios.php" class="small-box-footer">Lista de Usuarios <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="ingresar-usuario.php" class="small-box-footer">Crear Usuario <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->

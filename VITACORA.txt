@@ -1,1 +1,5 @@
-Enlace de paginacion:https://www.gitmedio.com/como-hacer-paginacion-codigo-en-php-y-mysql/
+Arreglar la vista de lista-usuarios.php y luego poner en todos los menus
+la opcion de inicio para el index.php.
+
+Despues de esto seguir viendo que hace falta en cuanto a seguridad
+y diseño.
