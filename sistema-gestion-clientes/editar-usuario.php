@@ -10,12 +10,12 @@
 ?>
 <?php require_once 'includes/cabecera.php'; ?>
 
-		
+	  	
 <!-- CAJA PRINCIPAL -->
 <div id="principal">
 	
 	      
-	<?php if(isset($_SESSION['usuario'])): ?>
+	<?php if(isset($_SESSION['usuario']) && $_SESSION['usuario']['nivel_usuario']=='administrador'): ?>
 		<div id="usuario-logueado" class="bloque">
 			
 			<!--botones-->
@@ -236,6 +236,18 @@
                 <a href="reportes.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Reporte cambio de filtros</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="lista-usuarios.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Lista de usuarios</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="ingresar-usuario.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Ingresar usuario</p>
                 </a>
               </li>
               <li class="nav-item">

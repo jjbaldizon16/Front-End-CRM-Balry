@@ -1,10 +1,10 @@
 <?php require_once 'includes/cabecera.php'; ?>
-<?php require_once 'includes/redireccion.php'; ?>
+<?php require_once 'includes/redireccion.php'; ?>   
 
 		
 <!-- CAJA PRINCIPAL -->
 <div id="principal">
-	
+	   
 	      
 	<?php if(isset($_SESSION['usuario']) && $_SESSION['usuario']['nivel_usuario']=='administrador'): ?>
 		<div id="usuario-logueado" class="bloque">
@@ -232,13 +232,13 @@
               <li class="nav-item">
                 <a href="lista-usuarios.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Lista de Usuarios</p>
+                  <p>Lista de usuarios</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="ingresar-usuario.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Ingresar Usuario</p>
+                  <p>Ingresar usuario</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -326,21 +326,51 @@
               <!-- Formulario Buscar cliente -->
 
               <form action="buscar-resultado-usuario.php" method="post">
-              <h5>Buscar Usuario</h5>
-              <label for="busqueda"></label>
+              <h5>Buscar usuario</h5>
+              <label for="nombre"></label>
               <input type="text" name="nombre" placeholder="Nombre del usuario">
               <button>Buscar</button>
               </form>
 
 <!--Fin formulario Buscar cliente-->
-                
+               <?php  
+               // Conexión a la base de datos (modifica con tus datos de conexión)
+               $servername = "localhost";
+               $username = "root";
+               $password = "";
+               $dbname = "u142702078_clientes";
+
+               // Recibir el nombre del cliente enviado desde el formulario
+               if (isset($_POST['nombre'])) {
+               $nombre = $_POST['nombre'];
+
+               // Conexión a la base de datos
+               $conn = new mysqli($servername, $username, $password, $dbname);
+
+               // Verificar la conexión
+               if ($conn->connect_error) {
+               die("Error de conexión: " . $conn->connect_error);
+               }
+
+               // Consulta para buscar el usuario por nombre
+               $sql = "SELECT id, nombre, apellidos, email, password, fecha, nivel_usuario FROM usuarios WHERE nombre LIKE '%$nombre%'";
+
+              // Ejecutar la consulta
+              $result = $conn->query($sql);
+
+              // Verificar si se encontraron resultados
+              if ($result->num_rows > 0){
+
+               ?>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                
+              <h1>Busqueda: <?=$_POST['nombre']?></h1>
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
+
+                  <td class="col">id</td>
 
                   <td class="col">Nombre</td>
 
@@ -359,100 +389,65 @@
                   </tr>
                   <?php 
 	
-	// Establecer la conexión a la base de datos (reemplaza los valores con los de tu base de datos)
-$host = 'localhost';
-$dbname = 'u142702078_clientes';
-$username = 'root';
-$password = '';
+	            // $entradas = conseguirEntradas($db, null, null, $_POST['busqueda']);
 
-try {
-    $dbh = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Error: " . $e->getMessage());
-}
-
-// Configuración de paginación
-$registrosPorPagina = 3;
-$paginaActual = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
-
-// Calcular el desplazamiento para la consulta SQL
-$desplazamiento = ($paginaActual - 1) * $registrosPorPagina;
-
-// Consulta SQL con INNER JOIN y LIMIT para la paginación
-$sql = "SELECT * FROM usuarios ORDER BY id LIMIT $desplazamiento, $registrosPorPagina";
-
-try {
-    $stmt = $dbh->prepare($sql);  
-    $stmt->execute();
-    $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
-    die("Error en la consulta: " . $e->getMessage());
-}
-
-// Consulta para obtener el total de registros sin aplicar el límite de paginación
-$totalRegistros = $dbh->query("SELECT COUNT(*) FROM usuarios")->fetchColumn();
-
-// Calcular el número total de páginas
-$totalPaginas = ceil($totalRegistros / $registrosPorPagina);
-
-// Mostrar los resultados
-foreach ($resultados as $fila):
+		        // if(!empty($entradas) && mysqli_num_rows($entradas) >= 1):
+			    // while($entrada = mysqli_fetch_assoc($entradas)):
+                    while ($row = $result->fetch_assoc()):
 
 
 	?>
 
                   </thead>
                   <tbody>
-                  
-       
-	              <td scope="row"><?=$fila['nombre']?></td>
+                  <td scope="row"><?=$row['id']?></td>
+    
+	              <td><?=$row['nombre']?></td>
 
-	              <td><?=$fila['apellidos']?></td>
+	              <td><?=$row['apellidos']?></td>
 
-	             <td><?=$fila['email']?></td>
+	             <td><?=$row['email']?></td>
 
-                 <td><?=$fila['password']?></td>
+                 <td><?=$row['password']?></td>
 
-                 <td><?=$fila['fecha']?></td>
+                 <td><?=$row['fecha']?></td>
 
-	             <td><?=$fila['nivel_usuario']?></td>
+	             <td><?=$row['nivel_usuario']?></td>
 
-                 <td><a href="editar-usuario.php?id=<?=$fila['id']?>" class="btn btn-primary">Editar registro</a></td>
-
-	            
+	             <td><a href="editar-usuario.php?id=<?=$row['id']?>" class="btn btn-primary">Editar registro</a></td>
 
 
 	
 
                   </tbody>
                   <tfoot>
-                  <?php 
-  
-                  endforeach;
-
-                  ?>
+                 
                   </tfoot>
+                  <?php
+			      endwhile;
+		        
+	             ?>
+
                 </table>
 
                 <?php
+			      }else {
+                    echo "<p>No hay clientes en el sistema.</p>";
+                  }
 
-                 // Mostrar la paginación
-                 echo "<br>";
-                 echo "Página " . $paginaActual . " de " . $totalPaginas . "<br>";
-                 if ($paginaActual > 1) {
-                 echo "<a class='btn btn-primary' href='?pagina=" . ($paginaActual - 1) . "'>Anterior</a> ";
-                 }
-                 if ($paginaActual < $totalPaginas) {
-                 echo "<a class='btn btn-primary' href='?pagina=" . ($paginaActual + 1) . "'>Siguiente</a>";
-                 }
-
-  
-  ?>
+                  // Cerrar la conexión
+                  $conn->close();
+                  } else {
+                  echo "<p>No se recibió el nombre del cliente.</p>";
+                  }
+                
+		          
+	             ?>
+		       
+	           
 
 
-                </div>
-              </div>
+
               </div>
               <!-- /.card-body -->
             </div>
@@ -484,9 +479,7 @@ foreach ($resultados as $fila):
 		
 	</div>
 
-	<?php else: ?>
-  <?php header("Location: index.php"); ?>
-  <?php endif; ?>
+	<?php endif; ?>
 	
 	<?php if(!isset($_SESSION['usuario'])): ?>
 	<!--<div id="login" class="bloque">-->
@@ -522,7 +515,7 @@ foreach ($resultados as $fila):
               <span class="fas fa-lock"></span>
             </div>
           </div>
-        </div>   
+        </div>
         <div class="row">
           <div class="col-8">
             <div class="icheck-primary">
@@ -552,5 +545,4 @@ foreach ($resultados as $fila):
 
 			
 <?php require_once 'includes/pie.php'; ?>
-
 
