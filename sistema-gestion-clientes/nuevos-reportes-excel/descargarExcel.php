@@ -1,3 +1,4 @@
+<?php require_once '../includes/cabecera.php'; ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,8 +8,9 @@
     <title>Descargar</title>
 </head>
 <body>
-    
-<?php
+<?php if(isset($_SESSION['usuario']) && $_SESSION['usuario']['nivel_usuario']=='administrador'): ?>
+    <div id="usuario-logueado" class="bloque">
+<?php    
 
 include('config.php');
 
@@ -69,6 +71,14 @@ $i =1;
     
 <?php } ?>
 </table>
+</div>
+<?php endif ?> 
+
+
+
 
 </body>
+    
+
+ 
 </html>

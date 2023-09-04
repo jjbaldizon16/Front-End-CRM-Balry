@@ -331,10 +331,14 @@
               <div class="card-header">
                 <h3 class="card-title">Editar Usuario</h3>
               </div>
-              <!-- /.card-header -->
+              <!-- /.card-header -->  
               <!-- form start -->
-              <form action="actualizar-usuario.php?editar=<?=$cambiousuario['id']?>" method="post">
+              <form action="actualizar-usuario-nuevo.php?editar=<?=$cambiousuario['id']?>" method="post">
                 <div class="card-body">
+                <div class="form-group">
+                    <label for="nombre"></label>
+                    <input type="number" name="id" class="form-control" id="exampleInputEmail1" value="<?=$cambiousuario['id']?>" hidden>
+                  </div>
                   <div class="form-group">
                     <label for="nombre">Nombre</label>
                     <input type="text" name="nombre" class="form-control" id="exampleInputEmail1" value="<?=$cambiousuario['nombre']?>">
