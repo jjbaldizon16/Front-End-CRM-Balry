@@ -1,4 +1,5 @@
 <?php require_once '../includes/cabecera.php'; ?>
+<?php require_once '../includes/redireccion.php'; ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,12 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Descargar</title>
 </head>
-<body>
-<?php if(isset($_SESSION['usuario']) && $_SESSION['usuario']['nivel_usuario']=='administrador'): ?>
-    <div id="usuario-logueado" class="bloque">
-<?php    
+<body>  
+<?php if(isset($_SESSION['usuario']) && $_SESSION['usuario']['nivel_usuario']=='administrador'):?>
+<div id="usuario-logueado" class="bloque">
+<?php
 
-include('config.php');
+include('sep9@xxiwqb9qb3.php');
 
 $provincia = $_POST['direccion_provincia'];
 $rango1 = $_POST['rango1'];
@@ -74,11 +75,17 @@ $i =1;
 </div>
 <?php endif ?> 
 
+<?php
+// Redirigir a una página web específica
+$pagina_redireccion = "../index.php";
+header("Location: $pagina_redireccion");
+exit; // Asegúrate de salir del script después de la redirección
+?>
 
 
 
 </body>
     
-
+   
  
 </html>
