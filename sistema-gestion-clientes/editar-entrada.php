@@ -17,7 +17,7 @@
 <div id="principal">
 	
 	      
-	<?php if(isset($_SESSION['usuario'])): ?>
+	<?php if(isset($_SESSION['usuario']) && $_SESSION['usuario']['nivel_usuario']=='administrador'): ?>
 		<div id="usuario-logueado" class="bloque">
 			
 			<!--botones-->
@@ -391,7 +391,19 @@
 		
 	</div>
 
-	<?php endif; ?>
+  <?php elseif(isset($_SESSION['usuario']) && $_SESSION['usuario']['nivel_usuario']=='vendedor'): ?>
+
+  <?php
+  // Redirigir a una URL específica
+  header("Location: index.php");
+  exit; // Asegúrate de salir del script después de la redirección
+  ?>
+
+
+
+<?php endif; ?>
+
+
 	
 	<?php if(!isset($_SESSION['usuario'])): ?>
 	<!--<div id="login" class="bloque">-->
